@@ -1,0 +1,36 @@
+# Call this whatever you want
+name: scrape
+
+# When does it get run?
+on:
+  # workflow_dispatch means "I can click a botton and force it to run"
+  workflow_dispatch:
+  # schedule/cron means "on a set schedule"
+  schedule:
+    - cron: '*/5 * * * *'
+    # runs every 5 minutes
+jobs:
+  scrape:
+    # For some reason, we run love versions of linux
+    runs-on: ubuntu-latest
+    steps:
+      # Download all of the code from your repo
+      
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      # MAKE SURE YOUR SCRAPER FILENAME MATCHES THE FILENAME HERE!!
+      - name: Run the scraping script
+        run: python scrape.py
+      # I just stole the rest of this code so don't ask me questions about it
+      - name: Commit and push if content changed
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
