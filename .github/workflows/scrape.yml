@@ -3,12 +3,11 @@ name: scrape
 
 # When does it get run?
 on:
-  # workflow_dispatch means "I can click a botton and force it to run"
+  # workflow_dispatch means "I can click a button and force it to run"
   workflow_dispatch:
   # schedule/cron means "on a set schedule"
   schedule:
     - cron: '*/5 * * * *'
-    # runs every 5 minutes
 jobs:
   scrape:
     # For some reason, we run love versions of linux
@@ -17,6 +16,7 @@ jobs:
       # Download all of the code from your repo
       - name: Check out this repo
         uses: actions/checkout@v2
+      # Set up Python 3.9
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -25,7 +25,7 @@ jobs:
         run: pip install pandas beautifulsoup4 requests
       # MAKE SURE YOUR SCRAPER FILENAME MATCHES THE FILENAME HERE!!
       - name: Run the scraping script
-        run: python scrape.py
+        run: python scraper.py
       # I just stole the rest of this code so don't ask me questions about it
       - name: Commit and push if content changed
         run: |-
