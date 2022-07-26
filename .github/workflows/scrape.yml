@@ -25,7 +25,7 @@ jobs:
         run: pip install pandas beautifulsoup4 requests
       # MAKE SURE YOUR SCRAPER FILENAME MATCHES THE FILENAME HERE!!
       - name: Run the scraping script
-        run: python scraper.py
+        run: python scrape.py
       # I just stole the rest of this code so don't ask me questions about it
       - name: Commit and push if content changed
         run: |-
