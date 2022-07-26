@@ -52,7 +52,7 @@ df
 # In[14]:
 
 
-#df.to_csv("bbc.csv",index=False)
+df.to_csv("bbc.csv",index=False)
 
 
 # In[ ]:
